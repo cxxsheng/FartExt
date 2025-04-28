@@ -263,7 +263,7 @@ static inline JValue Execute(
   DCHECK(!shadow_frame.GetMethod()->IsNative());
   //add
   if(result_register.GetI()==111111){
-    LOG(ERROR) << "fartext Execute start "<<shadow_frame.GetMethod()->PrettyMethod().c_str();
+    LOG(ERROR) << "cxxsheng Execute start "<<shadow_frame.GetMethod()->PrettyMethod().c_str();
   }
   if(strstr(shadow_frame.GetMethod()->PrettyMethod().c_str(),"<clinit>"))
   {
@@ -523,7 +523,7 @@ void EnterInterpreterFromInvoke(Thread* self,
         if (result != nullptr) {
           *result = r;
         }
-        LOG(ERROR) << "fartext Execute over"<<method->PrettyMethod().c_str();
+        LOG(ERROR) << "cxxsheng Execute over"<<method->PrettyMethod().c_str();
         return;
     }else{
         JValue r = Execute(self, accessor, *shadow_frame, JValue(), stay_in_interpreter);

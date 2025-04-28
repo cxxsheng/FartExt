@@ -1,4 +1,4 @@
-package cn.mik;
+package com.google;
 
 import android.app.ActivityThread;
 import android.app.Application;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Fartext {
+public class Futils {
     //为了反射封装，根据类名和字段名，反射获取字段
     public static Field getClassField(ClassLoader classloader, String class_name,
                                       String filedName) {
@@ -142,14 +142,14 @@ public class Fartext {
                 "android.app.ActivityThread$AppBindData",
                 mBoundApplication, "info");
         Application mApplication = (Application) getFieldObject("android.app.LoadedApk", loadedApkInfo, "mApplication");
-        Log.e("fartext", "go into app->" + "packagename:" + mApplication.getPackageName());
+        Log.e("cxxsheng", "go into app->" + "packagename:" + mApplication.getPackageName());
         resultClassloader = mApplication.getClassLoader();
         return resultClassloader;
     }
     //取指定类的所有构造函数，和所有函数，使用dumpMethodCode函数来把这些函数给保存出来
     public static void loadClassAndInvoke(ClassLoader appClassloader, String eachclassname, Method dumpMethodCode_method) {
         Class resultclass = null;
-        Log.e("fartext", "go into loadClassAndInvoke->" + "classname:" + eachclassname);
+        Log.e("cxxsheng", "go into loadClassAndInvoke->" + "classname:" + eachclassname);
         try {
             resultclass = appClassloader.loadClass(eachclassname);
         } catch (Exception e) {
@@ -168,7 +168,7 @@ public class Fartext {
                             if(constructor.getName().contains("cn.mik.")){
                                 continue;
                             }
-                            Log.e("fartext", "classname:" + eachclassname+ " constructor->invoke "+constructor.getName());
+                            Log.e("cxxsheng", "classname:" + eachclassname+ " constructor->invoke "+constructor.getName());
                             dumpMethodCode_method.invoke(null, constructor);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -178,7 +178,7 @@ public class Fartext {
                             continue;
                         }
                     } else {
-                        Log.e("fartext", "dumpMethodCode_method is null ");
+                        Log.e("cxxsheng", "dumpMethodCode_method is null ");
                     }
 
                 }
@@ -190,14 +190,14 @@ public class Fartext {
             try {
                 Method[] methods = resultclass.getDeclaredMethods();
                 if (methods != null) {
-                    Log.e("fartext", "classname:" + eachclassname+ " start invoke");
+                    Log.e("cxxsheng", "classname:" + eachclassname+ " start invoke");
                     for (Method m : methods) {
                         if (dumpMethodCode_method != null) {
                             try {
                                 if(m.getName().contains("cn.mik.")){
                                     continue;
                                 }
-                                Log.e("fartext", "classname:" + eachclassname+ " method->invoke:" + m.getName());
+                                Log.e("cxxsheng", "classname:" + eachclassname+ " method->invoke:" + m.getName());
                                 dumpMethodCode_method.invoke(null, m);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -207,10 +207,10 @@ public class Fartext {
                                 continue;
                             }
                         } else {
-                            Log.e("fartext", "dumpMethodCode_method is null ");
+                            Log.e("cxxsheng", "dumpMethodCode_method is null ");
                         }
                     }
-                    Log.e("fartext", "go into loadClassAndInvoke->"   + "classname:" + eachclassname+ " end invoke");
+                    Log.e("cxxsheng", "go into loadClassAndInvoke->"   + "classname:" + eachclassname+ " end invoke");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -224,8 +224,8 @@ public class Fartext {
     //然后拿到mCookie后，使用getClassNameList获取到所有类名。
     //loadClassAndInvoke处理所有类名导出所有函数
     //dumpMethodCode这个函数是fart自己加在DexFile中的
-    public static void fartWithClassLoader(ClassLoader appClassloader) {
-        Log.e("fartext", "fartWithClassLoader "+appClassloader.toString());
+    public static void fWithClassLoader(ClassLoader appClassloader) {
+        Log.e("cxxsheng", "fWithClassLoader "+appClassloader.toString());
         List<Object> dexFilesArray = new ArrayList<Object>();
         Field paist_Field = (Field) getClassField(appClassloader, "dalvik.system.BaseDexClassLoader", "pathList");
         Object pathList_object = getFieldObject("dalvik.system.BaseDexClassLoader", appClassloader, "pathList");
@@ -264,13 +264,13 @@ public class Fartext {
                 dumpDexFile_method = field;
                 dumpDexFile_method.setAccessible(true);
             }
-            if (field.getName().equals("fartextMethodCode")) {
+            if (field.getName().equals("fMethodCode")) {
                 dumpMethodCode_method = field;
                 dumpMethodCode_method.setAccessible(true);
             }
         }
         Field mCookiefield = getClassField(appClassloader, "dalvik.system.DexFile", "mCookie");
-        Log.e("fartext->methods", "dalvik.system.DexPathList.ElementsArray.length:" + ElementsArray.length);
+        Log.e("cxxsheng->methods", "dalvik.system.DexPathList.ElementsArray.length:" + ElementsArray.length);
         for (int j = 0; j < ElementsArray.length; j++) {
             Object element = ElementsArray[j];
             Object dexfile = null;
@@ -282,7 +282,7 @@ public class Fartext {
                 e.printStackTrace();
             }
             if (dexfile == null) {
-                Log.e("fartext", "dexfile is null");
+                Log.e("cxxsheng", "dexfile is null");
                 continue;
             }
             if (dexfile != null) {
@@ -294,7 +294,7 @@ public class Fartext {
                     {
                         mcookie=mInternalCookie;
                     }else{
-                        Log.e("fartext->err", "get mInternalCookie is null");
+                        Log.e("cxxsheng->err", "get mInternalCookie is null");
                         continue;
                     }
 
@@ -310,7 +310,7 @@ public class Fartext {
                     continue;
                 }
                 if (classnames != null) {
-                    Log.e("fartext", "all classes "+String.join(",",classnames));
+                    Log.e("cxxsheng", "all classes "+String.join(",",classnames));
                     for (String eachclassname : classnames) {
                         loadClassAndInvoke(appClassloader, eachclassname, dumpMethodCode_method);
                     }
@@ -321,23 +321,23 @@ public class Fartext {
         return;
     }
 
-    public static void fart() {
-        Log.e("fartext", "fart");
+    public static void f() {
+        Log.e("cxxsheng", "f");
         ClassLoader appClassloader = getClassloader();
         if(appClassloader==null){
-            Log.e("fartext", "appClassloader is null");
+            Log.e("cxxsheng", "appClassloader is null");
             return;
         }
         ClassLoader tmpClassloader=appClassloader;
         ClassLoader parentClassloader=appClassloader.getParent();
         if(appClassloader.toString().indexOf("java.lang.BootClassLoader")==-1)
         {
-            fartWithClassLoader(appClassloader);
+            fWithClassLoader(appClassloader);
         }
         while(parentClassloader!=null){
             if(parentClassloader.toString().indexOf("java.lang.BootClassLoader")==-1)
             {
-                fartWithClassLoader(parentClassloader);
+                fWithClassLoader(parentClassloader);
             }
             tmpClassloader=parentClassloader;
             parentClassloader=parentClassloader.getParent();
@@ -349,7 +349,7 @@ public class Fartext {
         String processName = ActivityThread.currentProcessName();
         BufferedReader br = null;
         String configPath="/data/local/tmp/fext.config";
-        Log.e("fartext", "shouldUnpack processName:"+processName);
+        Log.e("cxxsheng", "shouldUnpack processName:"+processName);
         try {
             br = new BufferedReader(new FileReader(configPath));
             String line;
@@ -362,7 +362,7 @@ public class Fartext {
             br.close();
         }
         catch (Exception ex) {
-            Log.e("fartext", "shouldUnpack err:"+ex.getMessage());
+            Log.e("cxxsheng", "shouldUnpack err:"+ex.getMessage());
         }
         return should_unpack;
     }
@@ -371,7 +371,7 @@ public class Fartext {
         String processName = ActivityThread.currentProcessName();
         BufferedReader br = null;
         String configPath="/data/local/tmp/"+processName;
-        Log.e("fartext", "getClassList processName:"+processName);
+        Log.e("cxxsheng", "getClassList processName:"+processName);
         StringBuilder sb=new StringBuilder();
         try {
             br = new BufferedReader(new FileReader(configPath));
@@ -385,16 +385,16 @@ public class Fartext {
             br.close();
         }
         catch (Exception ex) {
-            Log.e("fartext", "getClassList err:"+ex.getMessage());
+            Log.e("cxxsheng", "getClassList err:"+ex.getMessage());
             return "";
         }
         return sb.toString();
     }
 
-    public static void fartWithClassList(String classlist){
+    public static void fWithClassList(String classlist){
         ClassLoader appClassloader = getClassloader();
         if(appClassloader==null){
-            Log.e("fartext", "appClassloader is null");
+            Log.e("cxxsheng", "appClassloader is null");
             return;
         }
         Class DexFileClazz = null;
@@ -407,7 +407,7 @@ public class Fartext {
         }
         Method dumpMethodCode_method = null;
         for (Method field : DexFileClazz.getDeclaredMethods()) {
-            if (field.getName().equals("fartextMethodCode")) {
+            if (field.getName().equals("fMethodCode")) {
                 dumpMethodCode_method = field;
                 dumpMethodCode_method.setAccessible(true);
             }
@@ -423,14 +423,14 @@ public class Fartext {
         }
     }
 
-    public static void fartthread() {
+    public static void mainthread() {
 
         if (!shouldUnpack()) {
             return;
         }
         String classlist=getClassList();
         if(!classlist.equals("")){
-            fartWithClassList(classlist);
+            fWithClassList(classlist);
             return;
         }
 
@@ -439,15 +439,15 @@ public class Fartext {
             public void run() {
                 // TODO Auto-generated method stub
                 try {
-                    Log.e("fartext", "start sleep......");
+                    Log.e("cxxsheng", "start sleep......");
                     Thread.sleep(1 * 60 * 1000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Log.e("fartext", "sleep over and start fart");
-                fart();
-                Log.e("fartext", "fart run over");
+                Log.e("cxxsheng", "sleep over and start f");
+                f();
+                Log.e("cxxsheng", "f run over");
 
             }
         }).start();

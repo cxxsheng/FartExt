@@ -432,7 +432,7 @@ public final class DexFile {
     private static native String[] getClassNameList(Object cookie);
 
     //add
-    private static native void fartextMethodCode(Object m);
+    private static native void fMethodCode(Object m);
     //add end
 
     private static native boolean isBackedByOatFile(Object cookie);

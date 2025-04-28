@@ -172,7 +172,7 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 			char *dexfilepath=(char*)malloc(sizeof(char)*1000);
 			if(dexfilepath==nullptr)
 			{
-				LOG(ERROR)<< "fartext ArtMethod::dumpdexfilebyArtMethod,methodname:"<<artmethod->PrettyMethod().c_str()<<"malloc 1000 byte failed";
+				LOG(ERROR)<< "cxxsheng ArtMethod::dumpdexfilebyArtMethod,methodname:"<<artmethod->PrettyMethod().c_str()<<"malloc 1000 byte failed";
 				return;
 			}
 			int result=0;
@@ -187,7 +187,7 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 				result=read(fcmdline, szProcName,256);
 				if(result<0)
 				{
-					LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,open cmdline file error";
+					LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,open cmdline file error";
 					}
 				close(fcmdline);
 
@@ -225,7 +225,7 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 										  result=write(fp,(void*)begin_,size_);
 										  if(result<0)
 										  {
-											  LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,open dexfilepath error";
+											  LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,open dexfilepath error";
 											  }
 										  fsync(fp);
 										  close(fp);
@@ -241,14 +241,14 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 													result=write(classlistfile,(void*)descriptor,strlen(descriptor));
 													if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
 
 														}
 													const char* temp="\n";
 													result=write(classlistfile,(void*)temp,1);
 													if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
 
 														}
 													}
@@ -285,7 +285,7 @@ extern "C" bool ShouldUnpack() {
         result=read(fcmdline, szProcName,256);
         if(result<0)
         {
-            LOG(ERROR) << "fartext ArtMethod::ShouldUnpack,open cmdline file file error";
+            LOG(ERROR) << "cxxsheng ArtMethod::ShouldUnpack,open cmdline file file error";
         }
         close(fcmdline);
     }
@@ -309,11 +309,11 @@ extern "C" bool ShouldUnpack() {
 
 //主动调用函数的dump处理
 extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::mutator_lock_) {
-            LOG(ERROR) << "fartext ArtMethod::dumpArtMethod enter "<<artmethod->PrettyMethod().c_str();
+            LOG(ERROR) << "cxxsheng ArtMethod::dumpArtMethod enter "<<artmethod->PrettyMethod().c_str();
 			char *dexfilepath=(char*)malloc(sizeof(char)*1000);
 			if(dexfilepath==nullptr)
 			{
-				LOG(ERROR) << "fartext ArtMethod::dumpArtMethodinvoked,methodname:"<<artmethod->PrettyMethod().c_str()<<"malloc 1000 byte failed";
+				LOG(ERROR) << "cxxsheng ArtMethod::dumpArtMethodinvoked,methodname:"<<artmethod->PrettyMethod().c_str()<<"malloc 1000 byte failed";
 				return;
 			}
 			int result=0;
@@ -328,7 +328,7 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 				result=read(fcmdline, szProcName,256);
 				if(result<0)
 				{
-					LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,open cmdline file file error";
+					LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,open cmdline file file error";
 				}
 				close(fcmdline);
 			}
@@ -364,7 +364,7 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 										  result=write(fp,(void*)begin_,size_);
 										  if(result<0)
 											{
-												LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,open dexfilepath file error";
+												LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,open dexfilepath file error";
 
 											}
 										  fsync(fp);
@@ -381,14 +381,14 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 													result=write(classlistfile,(void*)descriptor,strlen(descriptor));
 													if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
 
 														}
 													const char* temp="\n";
 													result=write(classlistfile,(void*)temp,1);
 													if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write classlistfile file error";
 
 														}
 													}
@@ -431,7 +431,7 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 										  result=write(fp2,(void*)dexfilepath,contentlength);
 										  if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write ins file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write ins file error";
 
 														}
 										  long outlen=0;
@@ -439,13 +439,13 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 										  result=write(fp2,base64result,outlen);
 										  if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write ins file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write ins file error";
 
 														}
 										  result=write(fp2,"};",2);
 										  if(result<0)
 													{
-														LOG(ERROR) << "fartext ArtMethod::dumpdexfilebyArtMethod,write ins file error";
+														LOG(ERROR) << "cxxsheng ArtMethod::dumpdexfilebyArtMethod,write ins file error";
 
 														}
 										  fsync(fp2);
@@ -466,9 +466,9 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 				free(dexfilepath);
 				dexfilepath=nullptr;
 			}
-			LOG(ERROR) << "fartext ArtMethod::dumpArtMethod over "<<artmethod->PrettyMethod().c_str();
+			LOG(ERROR) << "cxxsheng ArtMethod::dumpArtMethod over "<<artmethod->PrettyMethod().c_str();
 }
-extern "C" void fartextInvoke(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::mutator_lock_) {
+extern "C" void cxxshengInvoke(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::mutator_lock_) {
     if(artmethod->IsNative()||artmethod->IsAbstract()){
         return;
     }
@@ -481,7 +481,7 @@ extern "C" void fartextInvoke(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
       args_size += 1;
     }
     result.SetI(111111);
-	LOG(ERROR) << "fartext fartextInvoke";
+	LOG(ERROR) << "cxxsheng cxxshengInvoke";
 	artmethod->Invoke(self, args, args_size, &result,artmethod->GetShorty());
 }
 
@@ -739,11 +739,11 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
       if(LIKELY(code_item!=nullptr)){
 
           if (IsStatic()) {
-            LOG(ERROR) << "fartext artMethod::Invoke Static Method "<<this->PrettyMethod().c_str();
+            LOG(ERROR) << "cxxsheng artMethod::Invoke Static Method "<<this->PrettyMethod().c_str();
             art::interpreter::EnterInterpreterFromInvoke(
                             self, this, nullptr, args, result, /*stay_in_interpreter=*/ true);
           }else{
-            LOG(ERROR) << "fartext artMethod::Invoke Method "<<this->PrettyMethod().c_str();
+            LOG(ERROR) << "cxxsheng artMethod::Invoke Method "<<this->PrettyMethod().c_str();
             art::interpreter::EnterInterpreterFromInvoke(
                       self, this, nullptr, args + 1, result, /*stay_in_interpreter=*/ true);
           }
@@ -767,7 +767,7 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
     }
   } else {
     if (result!=nullptr && result->GetI()==111111){
-        LOG(ERROR) << "fartext artMethod::Invoke return Native Method "<<this->PrettyMethod().c_str();
+        LOG(ERROR) << "cxxsheng artMethod::Invoke return Native Method "<<this->PrettyMethod().c_str();
         return;
     }
     DCHECK_EQ(runtime->GetClassLinker()->GetImagePointerSize(), kRuntimePointerSize);

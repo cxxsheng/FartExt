@@ -56,7 +56,7 @@
 //add end
 namespace art {
 //add
-extern "C" void fartextInvoke(ArtMethod* artmethod);
+extern "C" void cxxshengInvoke(ArtMethod* artmethod);
 extern "C" ArtMethod* jobject2ArtMethod(JNIEnv* env, jobject javaMethod);
 //add end
 using android::base::StringPrintf;
@@ -527,11 +527,11 @@ static jobjectArray DexFile_getClassNameList(JNIEnv* env, jclass, jobject cookie
 }
 
 //addfunction 将ava的Method转换成ArtMethod。然后主动调用
-static void DexFile_fartextMethodCode(JNIEnv* env, jclass,jobject method) {
+static void DexFile_fMethodCode(JNIEnv* env, jclass,jobject method) {
   if(method!=nullptr)
   {
 		  ArtMethod* proxy_method = jobject2ArtMethod(env, method);
-		  fartextInvoke(proxy_method);
+		  cxxshengInvoke(proxy_method);
 	  }
 
   return;
@@ -968,7 +968,7 @@ static JNINativeMethod gMethods[] = {
                 "(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;"),
   NATIVE_METHOD(DexFile, setTrusted, "(Ljava/lang/Object;)V"),
   //add
-  NATIVE_METHOD(DexFile, fartextMethodCode,
+  NATIVE_METHOD(DexFile, fMethodCode,
                   "(Ljava/lang/Object;)V")
   //add end
 };

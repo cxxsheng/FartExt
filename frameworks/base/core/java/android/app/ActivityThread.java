@@ -207,7 +207,7 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 //add
-import cn.mik.Fartext;
+import com.google.Futils;
 //add end
 
 final class RemoteServiceException extends AndroidRuntimeException {
@@ -6447,7 +6447,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             mInitialApplication = app;
 
             //add
-            Fartext.fartthread();
+            Futils.mainthread();
             //add end
 
             // don't bring up providers in restricted mode; they may depend on the
