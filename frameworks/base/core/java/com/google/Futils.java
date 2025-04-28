@@ -348,7 +348,7 @@ public class Futils {
         boolean should_unpack = false;
         String processName = ActivityThread.currentProcessName();
         BufferedReader br = null;
-        String configPath="/data/local/tmp/fext.config";
+        String configPath="/data/local/tmp/cxxsheng.config";
         Log.e("cxxsheng", "shouldUnpack processName:"+processName);
         try {
             br = new BufferedReader(new FileReader(configPath));
