@@ -204,15 +204,15 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 					  int size_int_=(int)size_;
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"%s","/sdcard/fext");
+					  sprintf(dexfilepath,"%s","/sdcard/cxxsheng");
 					  mkdir(dexfilepath,0777);
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"/sdcard/fext/%s",szProcName);
+					  sprintf(dexfilepath,"/sdcard/cxxsheng/%s",szProcName);
 					  mkdir(dexfilepath,0777);
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"/sdcard/fext/%s/%d_dexfile_execute.dex",szProcName,size_int_);
+					  sprintf(dexfilepath,"/sdcard/cxxsheng/%s/%d_dexfile_execute.dex",szProcName,size_int_);
 					  int dexfilefp=open(dexfilepath,O_RDONLY,0666);
 					  if(dexfilefp>0){
 						  close(dexfilefp);
@@ -230,7 +230,7 @@ extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod)  REQUIRES_SHARED(Lock
 										  fsync(fp);
 										  close(fp);
 										  memset(dexfilepath,0,1000);
-										  sprintf(dexfilepath,"/sdcard/fext/%s/%d_classlist_execute.txt",szProcName,size_int_);
+										  sprintf(dexfilepath,"/sdcard/cxxsheng/%s/%d_classlist_execute.txt",szProcName,size_int_);
 										  int classlistfile=open(dexfilepath,O_CREAT|O_APPEND|O_RDWR,0666);
 											if(classlistfile>0)
 											{
@@ -290,7 +290,7 @@ extern "C" bool ShouldUnpack() {
         close(fcmdline);
     }
     if(szProcName[0]){
-        const char* UNPACK_CONFIG = "/data/local/tmp/fext.config";
+        const char* UNPACK_CONFIG = "/data/local/tmp/cxxsheng.config";
         std::ifstream config(UNPACK_CONFIG);
         std::string line;
         if(config) {
@@ -343,15 +343,15 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 					  int size_int_=(int)size_;
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"%s","/sdcard/fext");
+					  sprintf(dexfilepath,"%s","/sdcard/cxxsheng");
 					  mkdir(dexfilepath,0777);
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"/sdcard/fext/%s",szProcName);
+					  sprintf(dexfilepath,"/sdcard/cxxsheng/%s",szProcName);
 					  mkdir(dexfilepath,0777);
 
 					  memset(dexfilepath,0,1000);
-					  sprintf(dexfilepath,"/sdcard/fext/%s/%d_dexfile.dex",szProcName,size_int_);
+					  sprintf(dexfilepath,"/sdcard/cxxsheng/%s/%d_dexfile.dex",szProcName,size_int_);
 					  int dexfilefp=open(dexfilepath,O_RDONLY,0666);
 					  if(dexfilefp>0){
 						  close(dexfilefp);
@@ -370,7 +370,7 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 										  fsync(fp);
 										  close(fp);
 										  memset(dexfilepath,0,1000);
-										  sprintf(dexfilepath,"/sdcard/fext/%s/%d_classlist.txt",szProcName,size_int_);
+										  sprintf(dexfilepath,"/sdcard/cxxsheng/%s/%d_classlist.txt",szProcName,size_int_);
 										  int classlistfile=open(dexfilepath,O_CREAT|O_APPEND|O_RDWR,0666);
 											if(classlistfile>0)
 											{
@@ -419,7 +419,7 @@ extern "C" void dumpArtMethod(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 									  memset(dexfilepath,0,1000);
 									  int size_int=(int)dex_file->Size();
 									  uint32_t method_idx=artmethod->GetDexMethodIndex();
-									  sprintf(dexfilepath,"/sdcard/fext/%s/%d_ins_%d.bin",szProcName,size_int,(int)gettidv1());
+									  sprintf(dexfilepath,"/sdcard/cxxsheng/%s/%d_ins_%d.bin",szProcName,size_int,(int)gettidv1());
 								      int fp2=open(dexfilepath,O_CREAT|O_APPEND|O_RDWR,0666);
 									  if(fp2>0){
 										  lseek(fp2,0,SEEK_END);
